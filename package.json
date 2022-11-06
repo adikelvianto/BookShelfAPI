@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "nodemon ./src/server.js",
-    "lint": "eslint ./"
+    "lint": "eslint ./src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^20.2.2"
+    "@hapi/hapi": "^20.2.2",
+    "nanoid": "^3.3.4"
   },
   "devDependencies": {
     "eslint": "^8.26.0",
