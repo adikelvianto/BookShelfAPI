@@ -50,7 +50,7 @@ const addBook = (request, h) => {
       status: 'success',
       message: 'Buku berhasil ditambahkan',
       data: {
-        BookId: id,
+        bookId: id,
       },
     });
     response.code(201);
@@ -82,4 +82,26 @@ const showBook = (request, h) => {
   return response;
 };
 
-module.exports = { addBook, showBook };
+const getBookbyId = (request, h) => {
+  const { bookId } = request.params;
+  const book = booksList.filter((n) => n.id === bookId)[0];
+
+  if (book !== undefined) {
+    const response = h.response({
+      status: 'success',
+      data: {
+        book,
+      },
+    });
+    response.code(200);
+    return response;
+  }
+  const response = h.response({
+    status: 'fail',
+    message: 'Buku tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+};
+
+module.exports = { addBook, showBook, getBookbyId };
