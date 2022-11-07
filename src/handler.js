@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid');
-const books = require('./books');
+const booksList = require('./books');
 
 const addBook = (request, h) => {
   const {
@@ -24,7 +24,7 @@ const addBook = (request, h) => {
     updatedAt,
     finished,
   };
-  books.push(newBook);
+  booksList.push(newBook);
 
   const withoutName = name.length === 0;
   const pageProblem = readPage > pageCount;
@@ -65,4 +65,21 @@ const addBook = (request, h) => {
   return response;
 };
 
-module.exports = addBook;
+const showBook = (request, h) => {
+  const books = booksList.map((book) => ({
+    id: book.id,
+    name: book.name,
+    publisher: book.publisher,
+  }));
+
+  const response = h.response({
+    status: 'success',
+    data: {
+      books,
+    },
+  });
+  response.code(200);
+  return response;
+};
+
+module.exports = { addBook, showBook };
