@@ -12,7 +12,7 @@ const routes = [
   // Get method
   {
     method: 'GET',
-    path: '/books',
+    path: '/{books?}',
     handler: showBook,
   },
   // Get specified book based on bookId

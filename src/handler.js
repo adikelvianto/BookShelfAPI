@@ -65,10 +65,23 @@ const addBook = (request, h) => {
 };
 
 const showBook = (request, h) => {
+  const { name, reading, finished } = request.query;
+
+  let filteredBooks = booksList;
+  if (name !== undefined) {
+    // eslint-disable-next-line max-len
+    filteredBooks = booksList.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()));
+  }
+  if (reading !== undefined) {
+    filteredBooks = booksList.filter((book) => Boolean(book.reading) === Boolean(reading));
+  }
+  if (finished !== undefined) {
+    filteredBooks = booksList.filter((book) => Boolean(book.finished) === Boolean(finished));
+  }
   const response = h.response({
     status: 'success',
     data: {
-      books: booksList.map((book) => ({
+      books: filteredBooks.map((book) => ({
         id: book.id,
         name: book.name,
         publisher: book.publisher,
