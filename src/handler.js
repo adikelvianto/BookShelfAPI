@@ -73,10 +73,10 @@ const showBook = (request, h) => {
     filteredBooks = booksList.filter((book) => book.name.toLowerCase().includes(name.toLowerCase()));
   }
   if (reading !== undefined) {
-    filteredBooks = booksList.filter((book) => Boolean(book.reading) === Boolean(reading));
+    filteredBooks = booksList.filter((book) => book.reading === (reading === '1'));
   }
   if (finished !== undefined) {
-    filteredBooks = booksList.filter((book) => Boolean(book.finished) === Boolean(finished));
+    filteredBooks = booksList.filter((book) => book.finished === (finished === '1'));
   }
   const response = h.response({
     status: 'success',
